@@ -75,7 +75,9 @@ export function Menu() {
   return (
     <Flex height="56px" bg="backgroundAlt" px="16px" alignItems="center" justifyContent="space-between" zIndex={9}>
       <Flex>
-        <Logo isDark={theme.isDark} href="https://pancakeswap.finance" />
+        <Logo isDark={theme.isDark} href="https://pancakeswap.finance" isPushed={false} togglePush={function (): void {
+          throw new Error('Function not implemented.')
+        } } />
 
         <Flex pl={['25px', null, '50px']}>
           <Box display={['none', null, 'flex']}>
