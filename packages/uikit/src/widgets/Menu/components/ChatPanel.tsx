@@ -10,7 +10,7 @@ interface Props {
   showMenu: boolean;
   showChat: boolean;
   totalMenuHeight: number;
-  chatLayout: ReactElement;
+  chatLayout?: ReactElement;
 }
 
 const StyledPanel = styled.div<{ showMenu: boolean; showChat: boolean; totalMenuHeight: number; }>`
