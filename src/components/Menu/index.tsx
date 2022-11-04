@@ -50,7 +50,7 @@ const Menu = (props) => {
           </>
         }
         banner={showPhishingWarningBanner && typeof window !== 'undefined' && <PhishingWarningBanner />}
-        chat={<ChatComponent />}
+        chat={typeof window !== 'undefined' && <ChatComponent />}
         isDark={isDark}
         toggleTheme={toggleTheme}
         currentLang={currentLanguage.code}
