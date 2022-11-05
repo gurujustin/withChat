@@ -8,12 +8,11 @@ import { StreamChat, StreamType } from "stream-chat";
 export const useClient = ({ apiKey, userData, tokenOrProvider }) => {
   const [chatClient, setChatClient] = useState(null);
 
-  
+
   useEffect(() => {
-    if(tokenOrProvider && userData) {
-      let didUserConnectInterrupt = false;
-      console.log("useClient", userData)
-      const client = new StreamChat(apiKey);        
+    if (tokenOrProvider && userData) {
+      const didUserConnectInterrupt = false;
+      const client = new StreamChat(apiKey);
       // const token = server.createToken('john');
       // prevents application from setting stale client (user changed, for example)
 
@@ -37,23 +36,23 @@ export const useClient = ({ apiKey, userData, tokenOrProvider }) => {
   return chatClient;
 };
 
-export const fetchTokenFromApi = (name) => {
-  const [token, setToken] = useState(null)
+export const useFetchTokenFromApi = (name) => {
+  const [token, setToken] = useState('')
   useEffect(() => {
-    const api = async() => {
-      const res = await fetch("https://stream-server1.herokuapp.com/token", 
-      {
-        method: "post",
-        headers: { "Content-Type" : "application/json"},
-        body: JSON.stringify({
-          input: name
+    const api = async () => {
+      const res = await fetch("https://stream-server1.herokuapp.com/token",
+        {
+          method: "post",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            input: name
+          })
         })
-      })
 
       res.json().then((data) => {
         setToken(data);
       })
-    } 
+    }
     // .then(response => response.text())
     //   .then(result => {
     //     console.log('token', result)
