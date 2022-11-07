@@ -94,11 +94,14 @@ const Menu: React.FC<React.PropsWithChildren<NavProps>> = ({
   const { isMobile, isMd } = useMatchBreakpoints();
   const isSmallerScreen = isMobile || isMd;
   const [isPushed, setIsPushed] = useState(!isSmallerScreen);
-  const [showChat, setShowChat] = useState(true)
+  const [showChat, setShowChat] = useState(!isMobile)
   const [showMenu, setShowMenu] = useState(true);
   const refPrevOffset = useRef(typeof window === "undefined" ? 0 : window.pageYOffset);
 
   const topBannerHeight = isMobile ? TOP_BANNER_HEIGHT_MOBILE : TOP_BANNER_HEIGHT;
+  // if (isMobile) {
+  //   setShowChat(false)
+  // }
 
   const totalTopMenuHeight = banner ? MENU_HEIGHT + topBannerHeight : MENU_HEIGHT;
 

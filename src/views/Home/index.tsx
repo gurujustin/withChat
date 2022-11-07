@@ -18,6 +18,7 @@ import CakeDataRow from './components/CakeDataRow'
 import { WedgeTopLeft, InnerWedgeWrapper, OuterWedgeWrapper, WedgeTopRight } from './components/WedgeSvgs'
 import UserBanner from './components/UserBanner'
 import MultipleBanner from './components/Banners/MultipleBanner'
+import ImgSlideBox from './components/ImgSlideBox'
 
 const StyledHeroSection = styled(PageSection)`
   padding-top: 16px;
@@ -73,6 +74,9 @@ const Home: React.FC<React.PropsWithChildren> = () => {
         <MultipleBanner />
         <Hero />
       </StyledHeroSection>
+      <PageSection index={2}>
+        <ImgSlideBox />
+      </PageSection>
       <PageSection
         innerProps={{ style: { margin: '0', width: '100%' } }}
         background={
