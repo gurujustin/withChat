@@ -1,4 +1,4 @@
-# 🥞 Pancake Frontend
+# 🥞 Pancake Frontend with chat
 
 This project contains the main features of the pancake application.
 
