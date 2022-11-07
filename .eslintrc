@@ -16,6 +16,7 @@
     "@next/next/no-img-element": 0,
     "no-sparse-arrays": 0,
     "react/no-unescaped-entities": "off",
+    "react/jsx-filename-extension": [1, { "allow": "as-needed" }],
     "@next/next/no-page-custom-font": "off",
     "react-hooks/exhaustive-deps": [
       "warn",
