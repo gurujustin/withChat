@@ -53,13 +53,6 @@ export const useFetchTokenFromApi = (name) => {
         setToken(data);
       })
     }
-    // .then(response => response.text())
-    //   .then(result => {
-    //     console.log('token', result)
-    //     setToken(result)
-    //     // return result;
-    // })
-    // .catch(error => console.warn(error));
     api();
   }, [name])
   return token;
