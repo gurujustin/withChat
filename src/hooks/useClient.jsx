@@ -3,6 +3,7 @@
 
 import { useEffect, useState } from "react";
 import { StreamChat, StreamType } from "stream-chat";
+import useInterval from "./useInterval";
 
 // we'll use src/hooks/useClient.js path for this example
 export const useClient = ({ apiKey, userData, tokenOrProvider }) => {
@@ -56,5 +57,24 @@ export const useFetchTokenFromApi = (name) => {
     api();
   }, [name])
   return token;
+};
+
+export const useFetchTokens = () => {
+  const [tokenInfo, setTokenInfo] = useState([{logoUrl: '', tokenTicker: '', tokenPrice: '', percentChange: '', contractAddress: ''}])
+  useEffect(() => {
+    const api = async () => {
+      const res = await fetch("https://ape-swap-api.herokuapp.com/tokens/trending",
+        {
+          method: "get",
+          headers: { "Content-Type": "application/json" }
+        })
+
+      res.json().then((data) => {
+        setTokenInfo(data);
+      })
+    }
+    api();
+  }, [])
+  return tokenInfo;
 };
 

@@ -19,6 +19,7 @@ import { WedgeTopLeft, InnerWedgeWrapper, OuterWedgeWrapper, WedgeTopRight } fro
 import UserBanner from './components/UserBanner'
 import MultipleBanner from './components/Banners/MultipleBanner'
 import ImgSlideBox from './components/ImgSlideBox'
+import TradingTokens from './components/TradingTokens'
 
 const StyledHeroSection = styled(PageSection)`
   padding-top: 16px;
@@ -75,6 +76,7 @@ const Home: React.FC<React.PropsWithChildren> = () => {
         <Hero />
       </StyledHeroSection>
       <PageSection index={2}>
+        <TradingTokens />
         <ImgSlideBox />
       </PageSection>
       <PageSection
