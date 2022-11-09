@@ -51,20 +51,23 @@ const TradingTokens = () => {
         {
           tokensData.map((token, index) => {
             if (from && index < 6 || !from && index > 5)
-            return (
-              <a href={"/swap?outputCurrency=" + token.contractAddress}>
-                <Flex width={145}>
-                  <img src={token.logoUrl} alt="" width={40} style={{height: "40px"}} />
-                  <Flex flexDirection="column" style={{marginLeft: "4px", width: "100%"}}>
-                    <Flex justifyContent="space-between">
-                      <Text>{token.tokenTicker}</Text>
-                      <Balance decimals={2} value={Number(token.percentChange)} color={Number(token.percentChange) > 0 ? "green" : "red"} unit="%"/>
+              return (
+                <a href={`/swap?outputCurrency=${token.contractAddress}`}>
+                  <Flex width={145}>
+                    <img src={token.logoUrl} alt="" width={40} style={{height: "40px"}} />
+                    <Flex flexDirection="column" style={{marginLeft: "4px", width: "100%"}}>
+                      <Flex justifyContent="space-between">
+                        <Text>{token.tokenTicker}</Text>
+                        <Balance decimals={2} value={Number(token.percentChange)} color={Number(token.percentChange) > 0 ? "green" : "red"} unit="%"/>
+                      </Flex>
+                      <Balance decimals={6} value={Number(token.tokenPrice)} prefix="$" />
                     </Flex>
-                    <Balance decimals={6} value={Number(token.tokenPrice)} prefix="$" />
                   </Flex>
-                </Flex>
-              </a>
-            )
+                </a>
+              )
+              return (
+                <></>
+              )
           })
         }
       </TokenGrid>
