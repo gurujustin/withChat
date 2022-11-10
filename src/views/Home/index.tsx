@@ -20,6 +20,7 @@ import UserBanner from './components/UserBanner'
 import MultipleBanner from './components/Banners/MultipleBanner'
 import ImgSlideBox from './components/ImgSlideBox'
 import TradingTokens from './components/TradingTokens'
+import TopSliderBar from './components/TopSliderBar'
 
 const StyledHeroSection = styled(PageSection)`
   padding-top: 16px;
@@ -72,7 +73,8 @@ const Home: React.FC<React.PropsWithChildren> = () => {
             <UserBanner />
           </UserBannerWrapper>
         )}
-        <MultipleBanner />
+        {/* <MultipleBanner /> */}
+        <TopSliderBar />
         <Hero />
       </StyledHeroSection>
       <PageSection index={2}>

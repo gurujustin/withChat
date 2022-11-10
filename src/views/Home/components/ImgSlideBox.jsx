@@ -36,7 +36,7 @@ const ImgSlideBox = () => {
             disableOnInteraction: false,
           }}
           modules={[Autoplay, Pagination]}
-          className="mySwiper"
+          className="img-slider-box"
       >
         {cardData.map((card) => {
           return (
