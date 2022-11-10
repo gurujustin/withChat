@@ -23,7 +23,6 @@ const StyledBox = styled.div`
 //   position: relative;
 //   margin: 0px 5px;
 // `
-let getTimeout = function () { let e = setTimeout, b = {}; setTimeout = function (a, c) { let d = e(a, c); b[d] = [Date.now(), c]; return d }; return function (a) { return (a = b[a]) ? Math.max(a[1] - Date.now() + a[0], 0) : NaN } }();
 
 // https://curtistimson.co.uk/post/js/default-negative-letiables-to-zero-in-javascript/
 function sanitisePercentage(i) {
@@ -72,7 +71,7 @@ const TopSliderBar = () => {
       setProgress(0)
       clearInterval(tick);
     }
-  
+   
     startProgressBar();
   
   }
