@@ -100,10 +100,7 @@ const TopSliderBar = () => {
 
             <SwiperSlide>
                 <StyledBox onClick={()=> {window.open(bar.link, "_blank")}}>
-                  <Image src={bar.img} alt="Top Bar Image" />
-                  {/* <ProgressBar>
-                    <Progress
-                  </ProgressBar> */}
+                  <img src={bar.img} alt="Top Bar" />
                   <div style={{margin: "0px 10px"}}>
                     <Progress letiant="flat" >
                       <ProgressBar
