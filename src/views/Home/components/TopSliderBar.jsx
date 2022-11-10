@@ -29,7 +29,9 @@ function sanitisePercentage(i) {
   return Math.min(100, Math.max(0, i));
 }
 
-let percentTime, tick, delta = 0;
+let percentTime
+let tick
+let delta = 0;
 
 const TopSliderBar = () => {
   const [prog, setProgress] = useState(0)
