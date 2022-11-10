@@ -23,9 +23,9 @@ const StyledBox = styled.div`
 //   position: relative;
 //   margin: 0px 5px;
 // `
-var getTimeout = function () { var e = setTimeout, b = {}; setTimeout = function (a, c) { var d = e(a, c); b[d] = [Date.now(), c]; return d }; return function (a) { return (a = b[a]) ? Math.max(a[1] - Date.now() + a[0], 0) : NaN } }();
+let getTimeout = function () { let e = setTimeout, b = {}; setTimeout = function (a, c) { let d = e(a, c); b[d] = [Date.now(), c]; return d }; return function (a) { return (a = b[a]) ? Math.max(a[1] - Date.now() + a[0], 0) : NaN } }();
 
-// https://curtistimson.co.uk/post/js/default-negative-variables-to-zero-in-javascript/
+// https://curtistimson.co.uk/post/js/default-negative-letiables-to-zero-in-javascript/
 function sanitisePercentage(i) {
   return Math.min(100, Math.max(0, i));
 }
@@ -99,11 +99,11 @@ const TopSliderBar = () => {
           className="top-side-bar"
           onSlideChange={(swiper)=>{
             // const swiper = this;
-            var defaultSlideDelay = swiper.params.autoplay.delay;
-            var currentIndex = swiper.realIndex + 1;
-            var currentSlide = swiper.slides[currentIndex];
+            let defaultSlideDelay = swiper.params.autoplay.delay;
+            let currentIndex = swiper.realIndex + 1;
+            let currentSlide = swiper.slides[currentIndex];
             console.log('current index', currentIndex)
-            var currentSlideDelay = currentSlide.getAttribute('data-swiper-autoplay') || defaultSlideDelay;
+            let currentSlideDelay = currentSlide.getAttribute('data-swiper-autoplay') || defaultSlideDelay;
 
             updateSwiperProgressBar( currentSlideDelay, swiper);
           }}
@@ -118,7 +118,7 @@ const TopSliderBar = () => {
                     <Progress
                   </ProgressBar> */}
                   <div style={{margin: "0px 10px"}}>
-                    <Progress variant="flat" >
+                    <Progress letiant="flat" >
                       <ProgressBar
                         $useDark
                         $background="#ff7e94"
