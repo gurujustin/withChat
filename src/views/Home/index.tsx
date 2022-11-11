@@ -74,9 +74,13 @@ const Home: React.FC<React.PropsWithChildren> = () => {
           </UserBannerWrapper>
         )}
         {/* <MultipleBanner /> */}
-        <TopSliderBar />
         <Hero />
       </StyledHeroSection>
+      <div>
+        <div style={{background: 'url("/images/casino-bg.png") no-repeat bottom', padding: "50px 0px", backgroundSize: "cover"}}>
+          <TopSliderBar />
+        </div>
+      </div>
       <PageSection index={2}>
         <TradingTokens />
         <ImgSlideBox />
