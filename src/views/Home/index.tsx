@@ -79,10 +79,10 @@ const Home: React.FC<React.PropsWithChildren> = () => {
       <div>
         <div style={{background: 'url("/images/casino-bg.png") no-repeat bottom', padding: "50px 0px", backgroundSize: "cover", position: "relative"}}>
           <TopSliderBar />
-          <div popout-data-v-ccdbb6a2 className='slider-graphic slider-graphic-1'></div>
-          <div popout-data-v-ccdbb6a2 className='slider-graphic slider-graphic-2'></div>
-          <div popout-data-v-ccdbb6a2 className='slider-graphic slider-graphic-3'></div>
-          <div popout-data-v-ccdbb6a2 className='slider-graphic slider-graphic-4'></div>
+          <div className='slider-graphic slider-graphic-1' />
+          <div className='slider-graphic slider-graphic-2' />
+          <div className='slider-graphic slider-graphic-3' />
+          <div className='slider-graphic slider-graphic-4' />
         </div>
       </div>
       <PageSection index={2}>
