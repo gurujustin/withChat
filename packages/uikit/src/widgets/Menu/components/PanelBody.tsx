@@ -1,13 +1,14 @@
 import React, { createElement, memo } from "react";
 import styled from "styled-components";
 // import { useLocation } from "react-router-dom";
-import { SvgProps } from "../../../components/Svg";
+import { HamburgerCloseIcon, HamburgerIcon, SvgProps } from "../../../components/Svg";
 // import * as IconModule from "../icons";
 import Accordion from "./Accordion";
 import { MenuEntry, LinkLabel, LinkStatus } from "./MenuEntry";
 import MenuLink from "./MenuLink";
 import { PanelProps, PushedProps } from "../types";
 import MenuItem from "../../../components/MenuItem";
+import { Button } from "../../../components/Button";
 
 interface Props extends PanelProps, PushedProps {
   isMobile: boolean;
@@ -23,13 +24,33 @@ const Container = styled.div`
   height: 100%;
 `;
 
+const MenuButton = styled.div`
+  color: ${({ theme }) => theme.colors.text};
+  padding: 0 8px;
+  border-radius: 8px;
+  background: none;
+  cursor: pointer;
+  height: 50px;
+  display: flex;
+  border: none;
+  margin-right: 24px;
+  margin-left: 6px;
+`;
+
 const PanelBody: React.FC<Props> = ({ isPushed, pushNav, isMobile, links, activeItem, activeSubItem }) => {
 
   // Close the menu when a user clicks a link on mobile
   const handleClick = isMobile ? () => pushNav(false) : undefined;
-
+  const handleClickNav = () => pushNav(!isPushed);
   return (
     <Container>
+      <MenuButton aria-label="Toggle menu" onClick={handleClickNav}>
+        {isPushed ? (
+          <HamburgerCloseIcon width="24px" color="textSubtle" />
+        ) : (
+          <HamburgerIcon width="24px" color="textSubtle" />
+        )}
+      </MenuButton>
       {links.map((entry) => {
         const Icon = entry.icon;
         // const iconElement = <Icon width="24px" mr="8px" />;
@@ -52,6 +73,7 @@ const PanelBody: React.FC<Props> = ({ isPushed, pushNav, isMobile, links, active
               className={calloutClass}
               isActive={entry.href === activeItem || entry.items?.some((item) => item.href === activeSubItem)}
             >
+              
               {isPushed &&
                 entry.items.map((item) => (
                   <MenuEntry key={item.href} secondary isActive={item.href === activeSubItem} onClick={handleClick}>

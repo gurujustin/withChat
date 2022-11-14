@@ -97,7 +97,6 @@ const TopSliderBar = () => {
       >
         {barData.map((bar) => {
           return (
-
             <SwiperSlide>
                 <StyledBox onClick={()=> {window.open(bar.link, "_blank")}}>
                   <img src={bar.img} alt="Top Bar" />

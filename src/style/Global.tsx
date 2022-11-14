@@ -107,6 +107,74 @@ const GlobalStyle = createGlobalStyle`
     max-width: 920px;
     border-radius: 10px;
   }
+
+  .slider-graphic {
+    animation-fill-mode: forwards;
+    background-size: contain!important;
+    position: absolute;
+    z-index: 6;
+  }
+  .slider-graphic-1 {
+    animation: scale 2s;
+    background: url('/images/gates-of-olympus.png') no-repeat 50%;
+    height: 23.5625rem;
+    left: 0;
+    bottom: 0;
+    transform: scale(1);
+    width: 19.125rem;
+  }
+  .slider-graphic-2 {
+    animation: delay 2s;
+    background: url('/images/book-of-wild.png') no-repeat 50%;
+    height: 16.5625rem;
+    left: 10rem;
+    bottom: 0;
+    transform: scale(1);
+    width: 14.125rem;
+  }
+  .slider-graphic-3 {
+    animation: delay 4s;
+    background: url('/images/crazy-time.png') no-repeat 50%;
+    height: 18.5625rem;
+    right: 0rem;
+    top: 0;
+    transform: scale(1);
+    width: 15.125rem;
+  }
+  .slider-graphic-4 {
+    animation: delay 6s;
+    background: url('/images/dog-house.png') no-repeat 50%;
+    height: 10.5625rem;
+    right: 0rem;
+    bottom: 0;
+    transform: scale(1);
+    width: 9.125rem;
+  }
+
+  @keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+
+  @keyframes scale {
+    0% {
+      transform: scale(0)
+    }
+    100% {
+      transform: scale(1)
+    }
+  }
+  @keyframes delay {
+    0% {
+      transform: scale(0)
+    }
+    50% {
+      transform: scale(0)
+    }
+    100% {
+      transform: scale(1)
+    }
+  }
 `
 
 export default GlobalStyle
