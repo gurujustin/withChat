@@ -7,6 +7,7 @@ import { PageMeta } from 'components/Layout/Page'
 import { useTranslation } from '@pancakeswap/localization'
 import { useActiveChainId } from 'hooks/useActiveChainId'
 import { ChainId } from '@pancakeswap/sdk'
+import Timer from 'components/Timer'
 import Hero from './components/Hero'
 import { swapSectionData, earnSectionData, cakeSectionData } from './components/SalesSection/data'
 import MetricsSection from './components/MetricsSection'
@@ -21,6 +22,7 @@ import MultipleBanner from './components/Banners/MultipleBanner'
 import ImgSlideBox from './components/ImgSlideBox'
 import TradingTokens from './components/TradingTokens'
 import TopSliderBar from './components/TopSliderBar'
+import RaffleHeader from './components/RaffleHeader'
 
 const StyledHeroSection = styled(PageSection)`
   padding-top: 16px;
@@ -76,6 +78,10 @@ const Home: React.FC<React.PropsWithChildren> = () => {
         {/* <MultipleBanner /> */}
         <Hero />
       </StyledHeroSection>
+      <div>
+        <RaffleHeader />
+        <Timer />
+      </div>
       <div>
         <div style={{background: 'url("/images/casino-bg.png") no-repeat bottom', padding: "50px 0px", backgroundSize: "cover", position: "relative"}}>
           <TopSliderBar />
