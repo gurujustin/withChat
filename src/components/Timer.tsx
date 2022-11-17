@@ -1,15 +1,18 @@
 import { useState, useEffect } from 'react';
+import { LotteryResponse } from 'state/types'
+import useSWR from 'swr'
+import useIsRenderLotteryBanner from 'views/Home/components/Banners/hooks/useIsRenderLotteryBanner';
 
 const Timer = () => {
   const [days, setDays] = useState(0);
   const [hours, setHours] = useState(0);
   const [minutes, setMinutes] = useState(0);
   const [seconds, setSeconds] = useState(0);
-
-  const deadline = "December, 31, 2022";
+  useIsRenderLotteryBanner()
+  const { data } = useSWR<LotteryResponse>(['currentLottery'])
 
   const getTime = () => {
-    const time = Date.parse(deadline) - Date.now();
+    const time = parseInt(data.endTime) * 1000 - Date.now();
 
     setDays(Math.floor(time / (1000 * 60 * 60 * 24)));
     setHours(Math.floor((time / (1000 * 60 * 60)) % 24));
@@ -21,7 +24,7 @@ const Timer = () => {
     const interval = setInterval(() => getTime(), 1000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [data]);
 
   return (
     <>
