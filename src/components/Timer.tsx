@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { useState, useEffect } from 'react';
 import { LotteryResponse } from 'state/types'
 import useSWR from 'swr'

@@ -1,3 +1,4 @@
+/* eslint-disable */
 import styled from "styled-components";
 import truncateHash from "utils/truncateHash";
 import { v4 as uuidv4} from "uuid";
@@ -19,42 +20,42 @@ const MessageList = ({ scrollRef, messages }) => {
                 let _messageDiv = new Array();
                 _messageDiv.push(message);
                 let k = 1;
-                // while(true) {
-                //     if(index + k < messages.length && message.sender.username == messages[index + k].sender.username){
-                //         _messageDiv.push(messages[index + k])
-                //     k++;
-                //     }
-                //     else if(index == messages.length - 1) break;
-                //     else break;
-                // }
+                while(true) {
+                    if(index + k < messages.length && message.sender.username === messages[index + k].sender.username){
+                        _messageDiv.push(messages[index + k])
+                    k++;
+                    }
+                    else if(index === messages.length - 1) break;
+                    else break;
+                }
 
                 return _messageDiv
             }
 
-            // if(index > 0 && message.sender.username == messages[index-1].sender.username){
-            //     return <></>
-            // }
-            // else
-            return (
-                
-                <div ref={scrollRef}  key={uuidv4()} >
-                    <MessageContent>
-                        <div className="message-header">
-                            <Davatar size={20} address={message.sender.address} />
-                            <p>{message.sender.username.length > 9 ? truncateHash(message.sender.username) : message.sender.username}</p>
-                        </div>
-                        {getAllMessage().map((_message) => {
-                            return (
-                                <div className="message-content">
-                                    <p className="smaller-text">{timeFormat(new Date(_message.updatedAt).getHours())  + ':' + timeFormat(new Date(_message.updatedAt).getMinutes())}</p>
-                                    <p className="normal-text">{_message.message}</p>
-                                </div>
-                            )
-                        })}
-                        
-                    </MessageContent>
-                </div>
-            );
+            if(index > 0 && message.sender.username === messages[index-1].sender.username){
+                return <></>
+            }
+            else {
+                return (
+                    
+                    <div ref={scrollRef}  key={uuidv4()} >
+                        <MessageContent>
+                            <div className="message-header">
+                                <Davatar size={20} address={message.sender.address} />
+                                <p>{message.sender.username.length > 9 ? truncateHash(message.sender.username) : message.sender.username}</p>
+                            </div>
+                            {getAllMessage().map((_message) => {
+                                return (
+                                    <div className="message-content">
+                                        <p className="smaller-text">{timeFormat(new Date(_message.updatedAt).getHours())  + ':' + timeFormat(new Date(_message.updatedAt).getMinutes())}</p>
+                                        <p className="normal-text">{_message.message}</p>
+                                    </div>
+                                )
+                            })}                            
+                        </MessageContent>
+                    </div>
+                );
+            }
         })}
     </div>
   )
