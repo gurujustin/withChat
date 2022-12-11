@@ -5,8 +5,6 @@ import orderBy from 'lodash/orderBy'
 import Davatar from '@davatar/react';
 
 const MessageList = ({ scrollRef, messages }) => {
-    console.log("debug mesages", messages)
-    messages = orderBy(messages, (msg) => msg.updatedAt, "asc")
     const timeFormat = (time) => {
         let result = time;
         if (time < 10) {
@@ -21,22 +19,22 @@ const MessageList = ({ scrollRef, messages }) => {
                 let _messageDiv = new Array();
                 _messageDiv.push(message);
                 let k = 1;
-                while(true) {
-                    if(index + k < messages.length && message.sender.username == messages[index + k].sender.username){
-                        _messageDiv.push(messages[index + k])
-                    k++;
-                    }
-                    else if(index == messages.length - 1) break;
-                    else break;
-                }
+                // while(true) {
+                //     if(index + k < messages.length && message.sender.username == messages[index + k].sender.username){
+                //         _messageDiv.push(messages[index + k])
+                //     k++;
+                //     }
+                //     else if(index == messages.length - 1) break;
+                //     else break;
+                // }
 
                 return _messageDiv
             }
 
-            if(index > 0 && message.sender.username == messages[index-1].sender.username){
-                return <></>
-            }
-            else
+            // if(index > 0 && message.sender.username == messages[index-1].sender.username){
+            //     return <></>
+            // }
+            // else
             return (
                 
                 <div ref={scrollRef}  key={uuidv4()} >

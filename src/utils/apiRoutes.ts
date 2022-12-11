@@ -1,4 +1,4 @@
-export const host = "http://localhost:8800";
+export const host = "https://pcchatserver.herokuapp.com";
 export const connect = `${host}/api/auth/connect`;
 export const setAvatarRoute = `${host}/api/auth/setAvatar`;
 export const setUserName = `${host}/api/auth/setUserName`;
