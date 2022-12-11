@@ -15,6 +15,7 @@ import GlobalSettings from './GlobalSettings'
 import { getActiveMenuItem, getActiveSubMenuItem } from './utils'
 import { footerLinks } from './config/footerConfig'
 import { SettingsMode } from './GlobalSettings/types'
+import { useWeb3React } from '../../../packages/wagmi/src/useWeb3React'
 
 const Menu = (props) => {
   const { isDark, setTheme } = useTheme()

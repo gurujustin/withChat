@@ -2,37 +2,11 @@
 // or keep it in the `src/App.js`, up to you
 
 import { useEffect, useState } from "react";
-import { StreamChat, StreamType } from "stream-chat";
 import useInterval from "./useInterval";
 
 // we'll use src/hooks/useClient.js path for this example
 export const useClient = ({ apiKey, userData, tokenOrProvider }) => {
   const [chatClient, setChatClient] = useState(null);
-
-
-  useEffect(() => {
-    if (tokenOrProvider && userData) {
-      const didUserConnectInterrupt = false;
-      const client = new StreamChat(apiKey);
-      // const token = server.createToken('john');
-      // prevents application from setting stale client (user changed, for example)
-
-      const connectionPromise = client.connectUser(userData, tokenOrProvider).then(() => {
-        if (!didUserConnectInterrupt) setChatClient(client);
-      });
-      // return () => {
-      //   didUserConnectInterrupt = true;
-      //   setChatClient(null);
-      //   // wait for connection to finish before initiating closing sequence
-      //   connectionPromise
-      //     .then(() => client.disconnectUser())
-      //     .then(() => {
-      //       console.log('connection closed');
-      //     });
-      // };
-    }
-
-  }, [apiKey, userData, tokenOrProvider]);
 
   return chatClient;
 };

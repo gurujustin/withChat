@@ -18,6 +18,9 @@ const GlobalStyle = createGlobalStyle`
       max-width: 100%;
     }
   }
+  .chat-messages {
+    max-height: calc(100% - 45px);
+  }
   .swiper {
     width: 100%;
     height: 100%;

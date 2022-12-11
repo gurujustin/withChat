@@ -36,8 +36,16 @@ const RewardBracketDetail: React.FC<React.PropsWithChildren<RewardBracketDetailP
     return t('Match first %numberMatch%', { numberMatch })
   }
 
+  let backgroundColor;
+  if (isBurn) {
+    backgroundColor = "red"
+  } else if (rewardBracket === 0) {
+    backgroundColor = "gold"
+  } else if (rewardBracket === 1) {
+    backgroundColor = "silver"
+  }
   return (
-    <Flex flexDirection="column">
+    <Flex flexDirection="column" style={{background: backgroundColor, padding: "5px", gridGap: "4px", borderRadius: "4px"}}>
       {isLoading ? (
         <Skeleton mb="4px" mt="8px" height={16} width={80} />
       ) : (

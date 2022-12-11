@@ -21,9 +21,11 @@ const Timer = () => {
   };
 
   useEffect(() => {
-    const interval = setInterval(() => getTime(), 1000);
-
-    return () => clearInterval(interval);
+    if(data){
+        const interval = setInterval(() => getTime(), 1000);
+    
+        return () => clearInterval(interval);
+    }
   }, [data]);
 
   return (
