@@ -74,14 +74,14 @@ const ChatComponent = () => {
   useEffect(() => {
     if (socket.current) {
       socket.current.on("msg-recieved", (msg) => {
-        // if (msg.sender.address != account) {
-        //   setArrivalMessage({
-        //     fromSelf: false,
-        //     message: msg.message,
-        //     sender: msg.sender,
-        //     updatedAt: msg.updatedAt
-        //   });
-        // }
+        if (msg.sender.address != account) {
+          setArrivalMessage({
+            fromSelf: false,
+            message: msg.message,
+            sender: msg.sender,
+            updatedAt: msg.updatedAt
+          });
+        }
       })
     }
   }, [socket.current, account]);
