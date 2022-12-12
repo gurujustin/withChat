@@ -87,7 +87,7 @@ const ChatComponent = () => {
       })
     }
 
-  }, [socket]);
+  }, [socket.current]);
 
   useEffect(()=>{
     arrivalMessage && setMessages((prev)=>[...prev,arrivalMessage]);
