@@ -2,7 +2,6 @@
 import styled from "styled-components";
 import truncateHash from "utils/truncateHash";
 import { v4 as uuidv4} from "uuid";
-import orderBy from 'lodash/orderBy'
 import Davatar from '@davatar/react';
 
 const MessageList = ({ scrollRef, messages }) => {
@@ -79,6 +78,7 @@ const MessageContent = styled.div`
 
     .message-content {
         display: flex;
+        padding-top: 8px;
         .smaller-text {
             font-size: 12px;
             font-weight: 400;

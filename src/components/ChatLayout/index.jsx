@@ -15,7 +15,6 @@ const ChatComponent = () => {
   const { account, isConnected } = useWeb3React()
   const [currentUser, setCurrentUser] = useState("")
   socket.current = io(host);
-  console.log("debug account", account)
 
   useEffect( () => {
     console.log("debug useEffect")
@@ -60,33 +59,31 @@ const ChatComponent = () => {
       message: msg,
       updatedAt: updateTime
     });
-    console.log('debug handleSendMsg', msg)
-    const msgs = [...messages];
-    msgs.push({
-      fromSelf: true,
-      message: msg,
-      sender: currentUser,
-      updatedAt: updateTime
-    });
-    setMessages(msgs);
+    // console.log('debug handleSendMsg', msg)
+    // const msgs = [...messages];
+    // msgs.push({
+    //   fromSelf: true,
+    //   message: msg,
+    //   sender: currentUser,
+    //   updatedAt: updateTime
+    // });
+    // setMessages(msgs);
   };
 
   useEffect(() => {
     if (socket.current) {
       socket.current.on("msg-recieved", (msg) => {
-        if (msg.sender.address != account) {
-          setArrivalMessage({
-            fromSelf: false,
-            message: msg.message,
-            sender: msg.sender,
-            updatedAt: msg.updatedAt
-          });
-
-        }
+        console.log("debug received", msg.sender.address, currentUser)
+        setArrivalMessage({
+          fromSelf: false,
+          message: msg.message,
+          sender: msg.sender,
+          updatedAt: msg.updatedAt
+        });
       })
     }
 
-  }, [socket.current]);
+  }, [socket]);
 
   useEffect(()=>{
     arrivalMessage && setMessages((prev)=>[...prev,arrivalMessage]);
