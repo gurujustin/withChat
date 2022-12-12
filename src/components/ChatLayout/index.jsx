@@ -36,20 +36,7 @@ const ChatComponent = () => {
     }
     fetchData();
 
-    if (socket.current) {
-      socket.current.on("msg-recieved", (msg) => {
-        if (account && msg.sender.address !== account ) {
-          console.log("debug msg-received", account, msg.sender.address)
-          setArrivalMessage({
-            fromSelf: false,
-            message: msg.message,
-            sender: msg.sender,
-            updatedAt: msg.updatedAt
-          });
-
-        }
-      })
-    }
+    
   }, [account])
 
   // useEffect(()=>{
@@ -84,23 +71,23 @@ const ChatComponent = () => {
     setMessages(msgs);
   };
 
-  // useEffect(() => {
-  //   if (socket.current) {
-  //     socket.current.on("msg-recieved", (msg) => {
-  //       if (msg.sender.address != account) {
-  //         setArrivalMessage({
-  //           fromSelf: false,
-  //           message: msg.message,
-  //           sender: msg.sender,
-  //           updatedAt: msg.updatedAt
-  //         });
+  useEffect(() => {
+    if (socket.current) {
+      socket.current.on("msg-recieved", (msg) => {
+        if (msg.sender.address != account) {
+          setArrivalMessage({
+            fromSelf: false,
+            message: msg.message,
+            sender: msg.sender,
+            updatedAt: msg.updatedAt
+          });
 
-  //         setMessages((prev)=>[...prev,arrivalMessage]);
-  //       }
-  //     })
-  //   }
+          setMessages((prev)=>[...prev,arrivalMessage]);
+        }
+      })
+    }
 
-  // }, [socket.current, account]);
+  }, [socket]);
 
   useEffect(()=>{
     arrivalMessage && setMessages((prev)=>[...prev,arrivalMessage]);
