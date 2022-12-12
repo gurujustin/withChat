@@ -82,7 +82,6 @@ const ChatComponent = () => {
             updatedAt: msg.updatedAt
           });
 
-          setMessages((prev)=>[...prev,arrivalMessage]);
         }
       })
     }
