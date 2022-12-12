@@ -14,10 +14,11 @@ const ChatComponent = () => {
   const scrollRef = useRef();
   const { account, isConnected } = useWeb3React()
   const [currentUser, setCurrentUser] = useState("")
-  const pubChat = process.env.PUBLIC_CHAT
   socket.current = io(host);
+  console.log("debug account", account)
 
   useEffect( () => {
+    console.log("debug useEffect")
     const connectUser = async() => {
       if (isConnected) {
         const { data } = await axios.post(connect, {address: account})
@@ -26,9 +27,6 @@ const ChatComponent = () => {
     }
 
     connectUser()
-  }, [account])
-
-  useEffect(() => {
 
     const fetchData = async () => {
       const response = await axios.post(getAllMessagesRoute, {
@@ -37,7 +35,22 @@ const ChatComponent = () => {
       setMessages(response.data);
     }
     fetchData();
-  }, [currentUser]);
+
+    if (socket.current) {
+      socket.current.on("msg-recieved", (msg) => {
+        if (msg.sender.address !== account) {
+          console.log("debug msg-received", account, msg.sender.address)
+          setArrivalMessage({
+            fromSelf: false,
+            message: msg.message,
+            sender: msg.sender,
+            updatedAt: msg.updatedAt
+          });
+
+        }
+      })
+    }
+  }, [account])
 
   // useEffect(()=>{
   //   if(currentUser){
@@ -60,7 +73,7 @@ const ChatComponent = () => {
       message: msg,
       updatedAt: updateTime
     });
-
+    console.log('debug handleSendMsg', msg)
     const msgs = [...messages];
     msgs.push({
       fromSelf: true,
@@ -71,20 +84,23 @@ const ChatComponent = () => {
     setMessages(msgs);
   };
 
-  useEffect(() => {
-    if (socket.current) {
-      socket.current.on("msg-recieved", (msg) => {
-        if (msg.sender.address != account) {
-          setArrivalMessage({
-            fromSelf: false,
-            message: msg.message,
-            sender: msg.sender,
-            updatedAt: msg.updatedAt
-          });
-        }
-      })
-    }
-  }, [socket.current, account]);
+  // useEffect(() => {
+  //   if (socket.current) {
+  //     socket.current.on("msg-recieved", (msg) => {
+  //       if (msg.sender.address != account) {
+  //         setArrivalMessage({
+  //           fromSelf: false,
+  //           message: msg.message,
+  //           sender: msg.sender,
+  //           updatedAt: msg.updatedAt
+  //         });
+
+  //         setMessages((prev)=>[...prev,arrivalMessage]);
+  //       }
+  //     })
+  //   }
+
+  // }, [socket.current, account]);
 
   useEffect(()=>{
     arrivalMessage && setMessages((prev)=>[...prev,arrivalMessage]);

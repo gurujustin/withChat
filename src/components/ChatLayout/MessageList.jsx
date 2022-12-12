@@ -13,6 +13,7 @@ const MessageList = ({ scrollRef, messages }) => {
         }
         return result
     }
+
   return (
     <div className = "chat-messages" style={{overflowY: "auto"}}  onContentSizeChange={() => this.scrollView.scrollToEnd({animated: true})}>
         {messages.map((message, index) => {
