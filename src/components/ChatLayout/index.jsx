@@ -38,7 +38,7 @@ const ChatComponent = () => {
 
     if (socket.current) {
       socket.current.on("msg-recieved", (msg) => {
-        if (msg.sender.address !== account) {
+        if (account && msg.sender.address !== account ) {
           console.log("debug msg-received", account, msg.sender.address)
           setArrivalMessage({
             fromSelf: false,
