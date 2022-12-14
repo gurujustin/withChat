@@ -1,3 +1,5 @@
+/* eslint-disable */
+import React, { useEffect } from 'react';
 import { NoProfileAvatarIcon, Flex, Heading, Skeleton, Text, Box, useMatchBreakpoints } from '@pancakeswap/uikit'
 import { useWeb3React } from '@pancakeswap/wagmi'
 import styled from 'styled-components'
@@ -5,6 +7,9 @@ import { useProfile } from 'state/profile/hooks'
 import ProfileAvatarWithTeam from 'components/ProfileAvatarWithTeam'
 import { useTranslation } from '@pancakeswap/localization'
 import truncateHash from 'utils/truncateHash'
+import axios from "axios";
+import { useSetAvatar } from 'hooks/useClient'
+import { setAvatarRoute } from '../../../../utils/apiRoutes'
 
 const Desktop = styled(Flex)`
   align-items: center;
@@ -39,6 +44,10 @@ const UserDetail = () => {
   const { t } = useTranslation()
   const { account } = useWeb3React()
   const { isMobile, isTablet, isDesktop } = useMatchBreakpoints()
+  
+  if (!isLoading && profile) {
+    useSetAvatar(account, profile.nft.image.thumbnail)
+  }
 
   return (
     <>

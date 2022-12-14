@@ -40,6 +40,33 @@ const useTokenBalance = (tokenAddress: string, forceBSC?: boolean) => {
   }
 }
 
+export const useGetTokenBalance = (tokenAddress: string, account: string) => {
+
+  const contract = useTokenContract(tokenAddress, false)
+
+  const key = useMemo(
+    () =>
+      account
+        ? {
+            contract: contract.connect(bscRpcProvider),
+            methodName: 'balanceOf',
+            params: [account],
+          }
+        : null,
+    [account, contract],
+  )
+
+  const { data, status, ...rest } = useSWRContract(key as any, {
+    refreshInterval: FAST_INTERVAL,
+  })
+
+  return {
+    ...rest,
+    fetchStatus: status,
+    balance: data ? new BigNumber(data.toString()) : BIG_ZERO,
+  }
+}
+
 export const useGetBnbBalance = () => {
   const { account } = useWeb3React()
   const { status, data, mutate } = useSWR([account, 'bnbBalance'], async () => {

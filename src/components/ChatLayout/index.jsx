@@ -3,7 +3,9 @@ import React, { useEffect, useState, useRef } from 'react';
 import { useTheme } from 'styled-components';
 import axios from "axios";
 import { io } from "socket.io-client";
-import { useFetchTokenFromApi } from '../../hooks/useClient';
+import useGetTokenBalance from 'hooks/useTokenBalance';
+import { useFetchMessages, useGetUserInfo } from 'hooks/useClient'
+import { getBalanceAmount } from 'utils/formatBalance';
 import { useWeb3React } from '../../../packages/wagmi/src/useWeb3React';
 import { connect, getAllMessagesRoute, sendMessageRoute, host } from '../../utils/apiRoutes'
 import MessageList from './MessageList'
@@ -14,39 +16,32 @@ const ChatComponent = () => {
   const scrollRef = useRef();
   const { account, isConnected } = useWeb3React()
   const [currentUser, setCurrentUser] = useState("")
+  
+  const [arrivalMessage, setArrivalMessage] = useState(null);
+  const { balance: userCake, fetchStatus } = useGetTokenBalance("0xe9e7cea3dedca5984780bafc599bd69add087d56", account)
+  const userCakeBalance = getBalanceAmount(userCake)
+  const [messages, setMessages] = useState([]);
+  // const messages = useFetchMessages("http://localhost:5000/api/message/getmsg")
   socket.current = io(host);
 
   useEffect( () => {
-    console.log("debug useEffect")
     const connectUser = async() => {
-      if (isConnected) {
-        const { data } = await axios.post(connect, {address: account})
+      if (isConnected && fetchStatus === "FETCHED") {
+        const whale = userCakeBalance.gt("2")
+        const { data } = await axios.post(connect, {address: account, isWhale: whale})
         setCurrentUser(data.user)
       }
     }
-
     connectUser()
 
     const fetchData = async () => {
       const response = await axios.post(getAllMessagesRoute, {
         sender: currentUser?._id,
       });
-      setMessages(response.data);
+      setMessages( response.data);
     }
     fetchData();
-
-    
-  }, [account])
-
-  // useEffect(()=>{
-  //   if(currentUser){
-  //     socket.current.emit("add-user", currentUser._id);
-  //   }
-  //  },[currentUser]);
-
-  const theme = useTheme()
-  const [messages, setMessages] = useState([]);
-  const [arrivalMessage, setArrivalMessage] = useState(null);
+  }, [account, fetchStatus])
 
   const handleSendMsg = async (msg) => {
     await axios.post(sendMessageRoute, {
@@ -59,21 +54,11 @@ const ChatComponent = () => {
       message: msg,
       updatedAt: updateTime
     });
-    // console.log('debug handleSendMsg', msg)
-    // const msgs = [...messages];
-    // msgs.push({
-    //   fromSelf: true,
-    //   message: msg,
-    //   sender: currentUser,
-    //   updatedAt: updateTime
-    // });
-    // setMessages(msgs);
   };
 
   useEffect(() => {
     if (socket.current) {
       socket.current.on("msg-recieved", (msg) => {
-        console.log("debug received", msg.sender.address, currentUser)
         setArrivalMessage({
           fromSelf: false,
           message: msg.message,

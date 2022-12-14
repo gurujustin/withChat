@@ -1,21 +1,35 @@
 /* eslint-disable */
 import styled from "styled-components";
 import truncateHash from "utils/truncateHash";
-import { v4 as uuidv4} from "uuid";
-import Davatar from '@davatar/react';
+import Jazzicon, { jsNumberForAddress } from 'react-jazzicon'
+import { useProfileForAddress } from 'state/profile/hooks'
 
 const MessageList = ({ scrollRef, messages }) => {
     const timeFormat = (time) => {
         let result = time;
         if (time < 10) {
-            result = "0" + time;
+            result = "0" + time; 
         }
         return result
     }
 
+    const AvatarWrapper = styled.div`
+        background-repeat: no-repeat;
+        background-size: cover;
+        border-radius: 50%;
+        position: relative;
+        width: 100%;
+        height: 100%;
+
+        & > img {
+            border-radius: 50%;
+        }
+    `
+
   return (
     <div className = "chat-messages" style={{overflowY: "auto"}}  onContentSizeChange={() => this.scrollView.scrollToEnd({animated: true})}>
         {messages.map((message, index) => {
+            const isAvatarSet = message.sender.avatarImage !== ""
             const getAllMessage = () => {
                 let _messageDiv = new Array();
                 _messageDiv.push(message);
@@ -38,11 +52,21 @@ const MessageList = ({ scrollRef, messages }) => {
             else {
                 return (
                     
-                    <div ref={scrollRef}  key={uuidv4()} >
+                    <div ref={scrollRef} >
                         <MessageContent>
                             <div className="message-header">
-                                <Davatar size={20} address={message.sender.address} />
+                                
+                                {isAvatarSet ? <img src = {message.sender.avatarImage} width={24} style={{borderRadius: "12px"}} /> : 
+                                    <Jazzicon diameter={20} seed={jsNumberForAddress(message.sender.address)} />
+                                }
                                 <p>{message.sender.username.length > 9 ? truncateHash(message.sender.username) : message.sender.username}</p>
+                                {message.sender.role === "admin" && <p className="badge role-badge">Admin</p>}
+                                {message.sender.isWhale && 
+                                    <>
+                                        <img src={'/images/whale.svg'} width="24" className="whale-badge" />
+                                        {/* <p className="badge whale-badge">Whale</p> */}
+                                    </>
+                                }
                             </div>
                             {getAllMessage().map((_message) => {
                                 return (
@@ -73,6 +97,18 @@ const MessageContent = styled.div`
         padding: 8px 1px;
         p {
             padding-left: 4px;
+        }
+        .whale-badge {
+            margin-left: 8px;
+            margin-top: -5px;
+        }
+        .badge {
+            padding: 2px 4px;
+            font-size: 12px;
+            background: red;
+            margin-left: 8px;
+            border-radius: 4px;
+            color: white;
         }
     }
 
