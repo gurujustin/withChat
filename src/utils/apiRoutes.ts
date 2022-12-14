@@ -1,4 +1,4 @@
-export const host = "https://pcchatserver.herokuapp.com/";
+export const host = "https://pcchatserver.herokuapp.com";
 export const connect = `${host}/api/auth/connect`;
 export const setWhale = `${host}/api/auth/setWhale`;
 export const setAvatarRoute = `${host}/api/auth/setAvatar`;
